@@ -11,13 +11,13 @@ class dynamic_array{
     size_t n;
 
 public: 
-    // ë°°ì—´ í¬ê¸°ë¥¼ ì¸ìë¡œ ë°›ëŠ” ìƒì„±ì ì¶”ê°€
+    // ¹è¿­ Å©±â¸¦ ÀÎÀÚ·Î ¹Ş´Â »ı¼ºÀÚ Ãß°¡
     dynamic_array(int n){
         this->n = n;
         data = new T[n];
     }
 
-    // ë³µì‚¬ ìƒì„±ì ì¶”ê°€
+    // º¹»ç »ı¼ºÀÚ Ãß°¡
     dynamic_array(const dynamic_array<T>& other){
         n = other.n;
         data = new T[n];
@@ -27,7 +27,7 @@ public:
         }
     }
 
-    // ë©¤ë²„ ë°ì´í„°ì— ì§ì ‘ ì ‘ê·¼ì„ ìœ„í•œ []ì—°ì‚°ìì™€ at() í•¨ìˆ˜ ì‘ì„±. arrayì™€ ë¹„ìŠ·í•œ ë°©ì‹ìœ¼ë¡œ ë°°ì—´ ì›ì†Œì— ì ‘ê·¼ ê°€ëŠ¥í•´ì§
+    // ¸â¹ö µ¥ÀÌÅÍ¿¡ Á÷Á¢ Á¢±ÙÀ» À§ÇÑ []¿¬»êÀÚ¿Í at() ÇÔ¼ö ÀÛ¼º. array¿Í ºñ½ÁÇÑ ¹æ½ÄÀ¸·Î ¹è¿­ ¿ø¼Ò¿¡ Á¢±Ù °¡´ÉÇØÁü
     T& operator[](int index){
         return data[index];
     }
@@ -43,34 +43,34 @@ public:
         throw "Index out of range -SungEun-";
     }
 
-    // ë°°ì—´ í¬ê¸°ë¥¼ ë°˜í™˜í•˜ëŠ” size() ë©¤ë²„ í•¨ìˆ˜ì™€ ì†Œë©¸ìë¥¼ êµ¬í˜„. 
-    // ì†Œë©¸ìì—ì„œëŠ” ë©”ëª¨ë¦¬ ë¦­ì„ ë°©ì§€í•˜ê¸° ìœ„í•´ í• ë‹¹ëœ ë©”ë¡œë¦¬ë¥¼ í•´ì œ
+    // ¹è¿­ Å©±â¸¦ ¹İÈ¯ÇÏ´Â size() ¸â¹ö ÇÔ¼ö¿Í ¼Ò¸êÀÚ¸¦ ±¸Çö. 
+    // ¼Ò¸êÀÚ¿¡¼­´Â ¸Ş¸ğ¸® ¸¯À» ¹æÁöÇÏ±â À§ÇØ ÇÒ´çµÈ ¸Ş·Î¸®¸¦ ÇØÁ¦
     size_t size() const{
         return n;
     }
 
     ~dynamic_array(){
-        delete[] data; // ë©”ëª¨ë¦¬ ë¦­ ë°©ì§€
+        delete[] data; // ¸Ş¸ğ¸® ¸¯ ¹æÁö
     }
 
-    // dynamic_arrayì˜ ë°°ì—´ ì›ì†Œë¥¼ ìˆœíšŒí•  ë•Œ ì‚¬ìš©í•  ë°˜ë³µì ê´€ë ¨ í•¨ìˆ˜ë¥¼ ì •ì˜
+    // dynamic_arrayÀÇ ¹è¿­ ¿ø¼Ò¸¦ ¼øÈ¸ÇÒ ¶§ »ç¿ëÇÒ ¹İº¹ÀÚ °ü·Ã ÇÔ¼ö¸¦ Á¤ÀÇ
     T* begin() {return data;}
     const T* begin() const {return data;}
     T* end() {return data + n;}
     const T* end() const {return data + n;}
 
-    // ë‘ ë°°ì—´ì„ í•˜ë‚˜ë¡œ í•©ì¹˜ëŠ” ì—°ì‚°ì„ ìˆ˜í–‰í•˜ëŠ” +ì—°ì‚°ì í•¨ìˆ˜ë¥¼ ì •ì˜
-    // ì´ í•¨ìˆ˜ëŠ” friendë¡œ ì„ ì–¸
+    // µÎ ¹è¿­À» ÇÏ³ª·Î ÇÕÄ¡´Â ¿¬»êÀ» ¼öÇàÇÏ´Â +¿¬»êÀÚ ÇÔ¼ö¸¦ Á¤ÀÇ
+    // ÀÌ ÇÔ¼ö´Â friend·Î ¼±¾ğ
     friend dynamic_array<T> operator+(const dynamic_array<T>& arr1, dynamic_array<T>& arr2){
         dynamic_array<T> result(arr1.size() + arr2.size());
-        copy(arr1.begin(), arr1.end(), result.begin());
-        copy(arr2.begin(), arr2.end(), result.begin() + arr1.size());
+        copy(arr1.begin(), arr1.end(), result.begin()); // result.beginºÎÅÍ arr1À» ÀÏ´Ü º¹»ç
+        copy(arr2.begin(), arr2.end(), result.begin() + arr1.size()); // result.begin¿¡¼­ º¹»çÇÑ arr1 ¹Ù·Î µÚºÎÅÍ arr2 º¹»ç
 
         return result;
     }
 
-    // ë°°ì—´ì— ì €ì¥ëœ ëª¨ë“  ë°ì´í„°ë¥¼ ë¬¸ìì—´ë¡œ ë°˜í™˜í•˜ëŠ” to_string() ë©¤ë²„ í•¨ìˆ˜ ì‘ì„±
-    // ì´ í•¨ìˆ˜ëŠ” ë°ì´í„° êµ¬ë¶„ì„ ìœ„í•œ ë¬¸ìì—´ sepë¥¼ ì¸ìë¡œ ë°›ìœ¼ë©°, sepì˜ ê¸°ë³¸ê°’ì€ ì‰½í‘œ(", ")ë¡œ ì§€ì •
+    // ¹è¿­¿¡ ÀúÀåµÈ ¸ğµç µ¥ÀÌÅÍ¸¦ ¹®ÀÚ¿­·Î ¹İÈ¯ÇÏ´Â to_string() ¸â¹ö ÇÔ¼ö ÀÛ¼º
+    // ÀÌ ÇÔ¼ö´Â µ¥ÀÌÅÍ ±¸ºĞÀ» À§ÇÑ ¹®ÀÚ¿­ sep¸¦ ÀÎÀÚ·Î ¹ŞÀ¸¸ç, sepÀÇ ±âº»°ªÀº ½±Ç¥(", ")·Î ÁöÁ¤
     string to_string(const string& sep = ", "){
         if(n == 0) return "";
 
@@ -78,13 +78,13 @@ public:
         os << data[0];
 
         for(int i = 1; i<n; i++){
-            os << sep << data[i];
+            os << sep << data[i]; // ÀÌ¶§ os << data[i] ÀÌ ºÎºĞÀº << Ç¥ÁØ Ãâ·ÂÀ» ¼öÁ¤ÇÔ ¹Ø¿¡¼­ ±×·¡¼­ Ãâ·Â¹æ½ÄÀÌ ÀÖÀ½.
         }
         return os.str();
     }
 };
 
-// í•™ìƒ ì •ë³´ë¥¼ ì €ì¥í•  êµ¬ì¡°ì²´ ì •ì˜. << ì—°ì‚°ìë¥¼ ì´ìš©í•œ í‘œì¤€ ì¶œë ¥ì„ ì§€ì›
+// ÇĞ»ı Á¤º¸¸¦ ÀúÀåÇÒ ±¸Á¶Ã¼ Á¤ÀÇ. << ¿¬»êÀÚ¸¦ ÀÌ¿ëÇÑ Ç¥ÁØ Ãâ·ÂÀ» Áö¿ø
 struct student
 {
     /* data */
@@ -98,37 +98,37 @@ ostream& operator<<(ostream& os, const student& s){
 
 int main(){
     int nStudent;
-    cout << "1ë°˜ í•™ìƒ ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ";
+    cout << "1¹İ ÇĞ»ı ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ";
     cin >> nStudent;
 
     dynamic_array<student> class1(nStudent);
     for(int i = 0; i<nStudent; i++){
         string name;
         int standard;
-        cout << i + 1 << "ë²ˆì§¸ í•™ìƒ ì´ë¦„ê³¼ ë‚˜ì´ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ";
+        cout << i + 1 << "¹øÂ° ÇĞ»ı ÀÌ¸§°ú ³ªÀÌ¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ";
         cin >> name >> standard;
         class1[i] = student{name, standard};
     }
 
-    // ë°°ì—´ í¬ê¸°ë³´ë‹¤ í° ì¸ë±ìŠ¤ì˜ í•™ìƒì— ì ‘ê·¼
+    // ¹è¿­ Å©±âº¸´Ù Å« ÀÎµ¦½ºÀÇ ÇĞ»ı¿¡ Á¢±Ù
     try{
-        // ì•„ë˜ ì£¼ì„ì„ í•´ì œí•˜ë©´ í”„ë¡œê·¸ë¨ì´ ë¹„ì •ìƒ ì¢…ë£Œí•©ë‹ˆë‹¤.
-        // class1[nStudent] = student {"John", 8}; // ì˜ˆìƒí•  ìˆ˜ ì—†ëŠ” ë™ì‘
+        // ¾Æ·¡ ÁÖ¼®À» ÇØÁ¦ÇÏ¸é ÇÁ·Î±×·¥ÀÌ ºñÁ¤»ó Á¾·áÇÕ´Ï´Ù.
+        // class1[nStudent] = student {"John", 8}; // ¿¹»óÇÒ ¼ö ¾ø´Â µ¿ÀÛ
 
-        class1.at(nStudent) = student{"John", 8}; // ì˜ˆì™¸ ë°œìƒ
+        class1.at(nStudent) = student{"John", 8}; // ¿¹¿Ü ¹ß»ı
     }
     catch (...)
     {
-        cout << "ì˜ˆì™¸ ë°œìƒ!" << endl;
+        cout << "¿¹¿Ü ¹ß»ı!" << endl;
     }
 
-    // ê¹Šì€ ë³µì‚¬
+    // ±íÀº º¹»ç
     auto class2 = class1;
-    cout << "1ë°˜ì„ ë³µì‚¬í•˜ì—¬ 2ë°˜ ìƒì„±: " << class2.to_string() << endl;
-
-    // ë‘ í•™ê¸‰ì„ í•©ì³ì„œ ìƒˆë¡œìš´ í° í•™ê¸‰ì„ ìƒì„±
+    cout << "1¹İÀ» º¹»çÇÏ¿© 2¹İ »ı¼º: " << class2.to_string("±×¸®°í") << endl;
+    cout << class2[1] << endl;
+    // µÎ ÇĞ±ŞÀ» ÇÕÃÄ¼­ »õ·Î¿î Å« ÇĞ±ŞÀ» »ı¼º
     auto class3 = class1 + class2;
-    cout << "1ë°˜ê³¼ 2ë°˜ì„ í•©ì³ 3ë°˜ ìƒì„±: " << class3.to_string() << endl; 
+    cout << "1¹İ°ú 2¹İÀ» ÇÕÃÄ 3¹İ »ı¼º: " << class3.to_string("±×¸®°í") << endl; 
 
     return 0;
 }
