@@ -74,5 +74,52 @@ int main(){
      *      - 조건자 자리에 람다 표현식을 사용 가능
      * 
      */
+    cout << endl << endl;
+
+    /**
+     * 두 가지 형태의 sort() 함수
+     * 1. std::less<value_type>을 비교자로 사용하여 오름차순
+     * 2. std::greater<value_type>을 비교자로서 매개변수로 넣어주면 내림차순
+     */
+    forward_list<int> list1 = {23, 0, 1, -2, 52, 34};
+    print(list1);
+    list1.sort();
+    print(list1);
+    list1.sort(greater<int>());
+    print(list1);
+    cout << endl << endl;
+
+    /**
+     * reverse() : 저장된 원소의 순서를 역순으로 변경
+     * unique() : 리스트에서 홀로 나타나는 원소는 놔두고, 인접하여 중복되는 원소에 대해서는 첫 번째만 남겨두고 나머지는 제거
+     *      - 각각의 원소를 나머지 원소 전체와 비교하는 것이 아니기 때문에 유일한 원소만 남게 하려면 정렬 먼저 해줘야 함
+     *      - 이 함수는 두 원소가 같은지를 판단하는 방식에 따라 두 가지 형태로 제공
+     *          1. 인자가 없는 형태 : 이때는 원소 타입의 등호 연산자를 사용하여 같은지를 판단.
+     *          2. bool값을 반환하는 이항 조건자를 인자로 받는 형태 : 이 조건자는 리스트 원소 타입의 인자를 두 개 받는다.
+     * 
+     */
+
+    forward_list<int> list2 = {2, 53, 1, 0, 4, 10};
+    print(list2);
+    list2.reverse();
+    print(list2);
+    
+    list2 = {0, 1, 0, 1, -1, 10, 5, 5, 10, 0};
+    print(list2);
+    list2.unique();
+    print(list2);
+ 
+    list2 = {0, 1, 0, 1, -1, 10, 5, 5, 10, 0};
+    print(list2);
+    list2.sort();
+    print(list2);
+    list2.unique();
+    print(list2);
+
+    list2.unique([](int a, int b){
+        return (b-a) < 2; // 리스트에서 특정 원소가 바로 앞 원소보다 2 이상 크지 않으면 삭제
+    });
+    print(list2);
+ 
     return 0;
 }
