@@ -35,7 +35,7 @@ public:
     }
 
 
-// singly_ll Å¬·¡½ºÀÇ ±âº» ¹İº¹ÀÚ¸¦ ±¸ÇöÇÕ´Ï´Ù. ÀÌ ¹İº¹ÀÚ´Â »ı¼ºÀÚ(constructor)¿Í Á¢±ÙÀÚ(accessor)¸¦ °¡Áı´Ï´Ù.
+// singly_ll í´ë˜ìŠ¤ì˜ ê¸°ë³¸ ë°˜ë³µìë¥¼ êµ¬í˜„í•©ë‹ˆë‹¤. ì´ ë°˜ë³µìëŠ” ìƒì„±ì(constructor)ì™€ ì ‘ê·¼ì(accessor)ë¥¼ ê°€ì§‘ë‹ˆë‹¤.
 struct singly_ll_iterator
 {
     /* data */
@@ -49,42 +49,42 @@ struct singly_ll_iterator
 
         node_ptr get() {return ptr;}
 
-        // ¼±Çà Áõ°¡¿Í ÈÄÇà Áõ°¡¸¦ À§ÇÑ ++¿¬»êÀÚ ÇÔ¼ö¸¦ ±¸ÇöÇÕ´Ï´Ù.
+        // ì„ í–‰ ì¦ê°€ì™€ í›„í–‰ ì¦ê°€ë¥¼ ìœ„í•œ ++ì—°ì‚°ì í•¨ìˆ˜ë¥¼ êµ¬í˜„í•©ë‹ˆë‹¤.
         singly_ll_iterator& operator++(){
-            // ¼±Çà Áõ°¡
+            // ì„ í–‰ ì¦ê°€
             ptr = ptr->next;
             return *this;
         }
         singly_ll_iterator& operator++(int){
-            // ÈÄÇà Áõ°¡
+            // í›„í–‰ ì¦ê°€
             singly_ll_iterator result = *this;
             ++(*this);
             return result;
         }
         
-        // µÎ ¿¬»êÀÚ°¡ °°ÀºÁö¸¦ ÆÇ´ÜÇÏ´Â °ü°è ¿¬»êÀÚ ÇÔ¼ö¸¦ friend·Î Á¤ÀÇÇÕ´Ï´Ù.
+        // ë‘ ì—°ì‚°ìê°€ ê°™ì€ì§€ë¥¼ íŒë‹¨í•˜ëŠ” ê´€ê³„ ì—°ì‚°ì í•¨ìˆ˜ë¥¼ friendë¡œ ì •ì˜í•©ë‹ˆë‹¤.
         friend bool operator==(const singly_ll_iterator& left, const singly_ll_iterator& right){
             cout << endl;
-            cout << "Custom µÎ ¿¬»êÀÚ°¡ °°ÀºÁö(==) ÆÇ´ÜÇÏ´Â friend·Î ±¸Çö ÇÑ ÇÔ¼öÀÔ´Ï´Ù." << endl;
+            cout << "Custom ë‘ ì—°ì‚°ìê°€ ê°™ì€ì§€(==) íŒë‹¨í•˜ëŠ” friendë¡œ êµ¬í˜„ í•œ í•¨ìˆ˜ì…ë‹ˆë‹¤." << endl;
             return left.ptr == right.ptr;
         }
         friend bool operator!=(const singly_ll_iterator& left, const singly_ll_iterator& right){
             cout << endl;
-            cout << "Custom µÎ ¿¬»êÀÚ°¡ ´Ù¸¥Áö(!=) ÆÇ´ÜÇÏ´Â friend·Î ±¸Çö ÇÑ ÇÔ¼öÀÔ´Ï´Ù." << endl;
+            cout << "Custom ë‘ ì—°ì‚°ìê°€ ë‹¤ë¥¸ì§€(!=) íŒë‹¨í•˜ëŠ” friendë¡œ êµ¬í˜„ í•œ í•¨ìˆ˜ì…ë‹ˆë‹¤." << endl;
             return left.ptr != right.ptr;
         }
 };
-    // ´Ù½Ã singly_ll Å¬·¡½º ±¸ÇöÀ¸·Î µ¹¾Æ¿Í¼­, ¾Õ¿¡¼­ ¹İº¹ÀÚ Á¤ÀÇÇßÀ¸¹Ç·Î begin()°ú end()ÇÔ¼ö¸¦ Ãß°¡ µÎ ÇÔ¼öÀÇ const ¹öÀüµµ ÇÔ²² Ãß°¡
+    // ë‹¤ì‹œ singly_ll í´ë˜ìŠ¤ êµ¬í˜„ìœ¼ë¡œ ëŒì•„ì™€ì„œ, ì•ì—ì„œ ë°˜ë³µì ì •ì˜í–ˆìœ¼ë¯€ë¡œ begin()ê³¼ end()í•¨ìˆ˜ë¥¼ ì¶”ê°€ ë‘ í•¨ìˆ˜ì˜ const ë²„ì „ë„ í•¨ê»˜ ì¶”ê°€
     singly_ll_iterator begin() {return singly_ll_iterator(head);}
     singly_ll_iterator end() {return singly_ll_iterator(NULL);}
     singly_ll_iterator begin() const { return singly_ll_iterator(head);}
     singly_ll_iterator end() const {return singly_ll_iterator(NULL);}
 
-    // ±âº» »ı¼ºÀÚ, ±íÀº º¹»ç¸¦ À§ÇÑ º¹»ç »ı¼ºÀÚ, ÃÊ±âÈ­ ¸®½ºÆ®¸¦ »ç¿ëÇÏ´Â »ı¼ºÀÚ¸¦ Ãß°¡ÇÕ´Ï´Ù.
+    // ê¸°ë³¸ ìƒì„±ì, ê¹Šì€ ë³µì‚¬ë¥¼ ìœ„í•œ ë³µì‚¬ ìƒì„±ì, ì´ˆê¸°í™” ë¦¬ìŠ¤íŠ¸ë¥¼ ì‚¬ìš©í•˜ëŠ” ìƒì„±ìë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
     singly_ll() = default;
     singly_ll(const singly_ll& other) : head(NULL){
         cout << endl;
-        cout << "Custom º¹»ç »ı¼ºÀÚÀÔ´Ï´Ù." << endl;
+        cout << "Custom ë³µì‚¬ ìƒì„±ìì…ë‹ˆë‹¤." << endl;
         if(other.head){
             head = new node{0, NULL};
             auto cur = head;
@@ -107,7 +107,7 @@ struct singly_ll_iterator
     }
     singly_ll(const initializer_list<int>& ilist) : head(NULL){
         cout << endl;
-        cout << "Custom ÃÊ±âÈ­ ¸®½ºÆ®¸¦ »ç¿ëÇÏ´Â »ı¼ºÀÚÀÔ´Ï´Ù." << endl;
+        cout << "Custom ì´ˆê¸°í™” ë¦¬ìŠ¤íŠ¸ë¥¼ ì‚¬ìš©í•˜ëŠ” ìƒì„±ìì…ë‹ˆë‹¤." << endl;
         for(auto it = rbegin(ilist); it != rend(ilist); it++){
             push_front(*it);
         }
@@ -137,7 +137,7 @@ int main(){
     singly_ll sll = {1, 2, 3};
     sll.push_front(0);
 
-    cout << "Ã¹ ¹øÂ° ¸®½ºÆ®: ";
+    cout << "ì²« ë²ˆì§¸ ë¦¬ìŠ¤íŠ¸: ";
     for(auto i : sll){
         cout << i << " "; 
     } 
@@ -145,13 +145,13 @@ int main(){
 
     auto sll2 = sll;
     sll2.push_front(-1);
-    cout << "Ã¹ ¹øÂ° ¸®½ºÆ®¸¦ º¹»çÇÑ ÈÄ, ¸Ç ¾Õ¿¡ -1À» Ãß°¡: ";
+    cout << "ì²« ë²ˆì§¸ ë¦¬ìŠ¤íŠ¸ë¥¼ ë³µì‚¬í•œ í›„, ë§¨ ì•ì— -1ì„ ì¶”ê°€: ";
     for(auto i : sll2){
         cout << i << ' ';
     }
     cout << endl;
 
-    cout << "±íÀº º¹»ç ÈÄ Ã¹ ¹øÂ° ¸®½ºÆ®: ";
+    cout << "ê¹Šì€ ë³µì‚¬ í›„ ì²« ë²ˆì§¸ ë¦¬ìŠ¤íŠ¸: ";
     for(auto i : sll){
         cout << i << ' ';
     }
