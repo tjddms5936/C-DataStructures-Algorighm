@@ -22,7 +22,6 @@ class PlayList
 public:
     using node =  PlayList_node<T>;
     using node_ptr = node*;
-
 private:
     /* data */
     node_ptr head;
@@ -79,6 +78,7 @@ public:
     private:
         node_ptr ptr;
     public:
+        // 아래와 같이 : ptr(p)를 쓰는 것은 보통 const 변수를 초기화 시키기 위한 이니셜라이즈 방법이다. 
         PlayList_it(node_ptr p) : ptr(p) {}
 
         T& operator*(){
